@@ -43,7 +43,7 @@ all() ->
     ].
 
 groups() ->
-    G = [{mod_global_distrib, [shuffle, {repeat, 200}],
+    G = [{mod_global_distrib, [shuffle, {repeat, 500}],
           [
            % test_pm_between_users_at_different_locations,
            % test_pm_between_users_before_available_presence,
@@ -910,9 +910,8 @@ refresh_node(NodeName, Config) ->
 
 connect_from_spec(UserSpec, Config) ->
     {ok, User} = escalus_client:start(Config, UserSpec, <<"res1">>),
-    escalus_story:send_initial_presence(User),
-    escalus:wait_for_stanza(User),
     escalus_connection:set_filter_predicate(User, fun(S) -> not escalus_pred:is_presence(S) end),
+    escalus_story:send_initial_presence(User),
     User.
 
 chat_with_seqnum(To, Text) ->
