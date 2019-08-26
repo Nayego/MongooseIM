@@ -565,6 +565,7 @@ test_pm_with_graceful_reconnection_to_different_server(Config) ->
 
               escalus_client:send(Alice, chat_with_seqnum(Eve, <<"Hi from Europe1!">>)),
               NewEve = connect_from_spec([{port, 5222} | EveSpec], Config),
+              timer:sleep(500),
 
               escalus_client:send(Alice, chat_with_seqnum(Eve, <<"Hi again from Europe1!">>)),
               escalus_client:send(NewEve, escalus_stanza:chat_to(Alice, <<"Hi again from Asia!">>)),
@@ -606,6 +607,7 @@ test_pm_with_ungraceful_reconnection_to_different_server(Config0) ->
               escalus_client:send(Alice, chat_with_seqnum(Eve, <<"Hi from Europe1!">>)),
 
               NewEve = connect_from_spec(EveSpec2, Config),
+              timer:sleep(500),
 
               escalus_client:send(Alice, chat_with_seqnum(Eve, <<"Hi again from Europe1!">>)),
               escalus_client:send(NewEve, escalus_stanza:chat_to(Alice, <<"Hi from Asia!">>)),
