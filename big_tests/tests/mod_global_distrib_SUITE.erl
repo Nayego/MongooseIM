@@ -43,22 +43,22 @@ all() ->
     ].
 
 groups() ->
-    G = [{mod_global_distrib, [shuffle],
+    G = [{mod_global_distrib, [shuffle, {repeat, 200}],
           [
-           test_pm_between_users_at_different_locations,
-           test_pm_between_users_before_available_presence,
-           test_muc_conversation_on_one_host,
-           test_component_disconnect,
-           test_component_on_one_host,
-           test_components_in_different_regions,
-           test_hidden_component_disco_in_different_region,
-           test_pm_with_disconnection_on_other_server,
+           % test_pm_between_users_at_different_locations,
+           % test_pm_between_users_before_available_presence,
+           % test_muc_conversation_on_one_host,
+           % test_component_disconnect,
+           % test_component_on_one_host,
+           % test_components_in_different_regions,
+           % test_hidden_component_disco_in_different_region,
+           % test_pm_with_disconnection_on_other_server,
            test_pm_with_graceful_reconnection_to_different_server,
-           test_pm_with_ungraceful_reconnection_to_different_server,
-           test_global_disco,
-           test_component_unregister,
-           test_update_senders_host,
-           test_update_senders_host_by_ejd_service
+           test_pm_with_ungraceful_reconnection_to_different_server
+           % test_global_disco,
+           % test_component_unregister,
+           % test_update_senders_host,
+           % test_update_senders_host_by_ejd_service
            %% TODO: Add test case fo global_distrib_addr option
           ]},
          {hosts_refresher, [],
@@ -96,7 +96,8 @@ groups() ->
            test_pm_between_users_at_different_locations
           ]}
         ],
-    ct_helper:repeat_all_until_all_ok(G).
+    G.
+    % ct_helper:repeat_all_until_all_ok(G).
 
 suite() ->
     [{require, europe_node1, {hosts, mim, node}},
